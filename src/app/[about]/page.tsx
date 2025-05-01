@@ -1,5 +1,5 @@
 import Image from 'next/image';
-
+import Link from 'next/link';
 export default function About() {
     return (
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -11,7 +11,7 @@ export default function About() {
                         width={100}
                         height={100}
                     />
-                    <span className="text-lg font-bold"><a href="/">MixHaus</a></span>
+                    <span className="text-lg font-bold"><Link href="/">MixHaus</Link></span>
                     </div>
                     <div className='flex items-center' style={{marginTop: '30px', marginRight: '20px'}}>
                     <Image 
@@ -30,11 +30,11 @@ export default function About() {
                 <span className="flex items-center gap-2">
                     Mix. Sip. Repeat.
                 </span>
-                <a 
+                <Link 
                     className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                     href="about">
                     About
-                </a>
+                </Link>
                 <a
                     className="flex items-center gap-2 hover:underline hover:underline-offset-4"
                     href="https://forms.gle/rxcNXJFtwxizjCxA8"
