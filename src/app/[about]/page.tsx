@@ -24,7 +24,17 @@ export default function About() {
             </header>
             <div className="w-full h-[3px] bg-[#a984ee] absolute top-[120px]"></div>
             <main>
-
+                <div className="flex gap-4 items-center flex-col sm:flex-row">
+                    <div className="flex flex-col gap-4">
+                        <h1 className="text-4xl font-bold text-center">About</h1>
+                        <p className="text-lg">
+                            Welcome to MixHaus.We are passionate about mixology and aim to provide you
+                            with a curated collection of delicious cocktails that you can easily make at home.
+                            Whether you're a seasoned bartender or just starting out, we have something for everyone.
+                            Cheers!
+                        </p>
+                    </div>
+                </div>
             </main>
             <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center p-4 mt-25">
                 <span className="flex items-center gap-2">
