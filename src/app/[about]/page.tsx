@@ -30,7 +30,7 @@ export default function About() {
                         <p className="text-lg text-center mb-4 max-w-xl">
                             Welcome to MixHaus. We are passionate about mixology and aim to provide you
                             with a curated collection of delicious cocktails that you can easily make at home.
-                            Whether you're a seasoned bartender or just starting out, we have something for everyone.
+                            Whether you are a seasoned bartender or just starting out, we have something for everyone.
                             Cheers!
                         </p>
                     </div>
