@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "__tests__/src/app/Database.test.ts"  ],
   "exclude": [
     "node_modules"
   ]
