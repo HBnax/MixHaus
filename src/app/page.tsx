@@ -1,8 +1,17 @@
-import React from "react";
+"use client"
+
+import React, {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Handle search logic here
+    console.log("Searching for:", searchQuery);
+  }
   return (
       <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
         <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[120px] p-4 z-10">
@@ -38,6 +47,22 @@ export default async function Home() {
               </p>
             </div>
           </div>
+
+          <form onSubmit={handleSearch} className = "flex items-center gap-2 mt-8">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for cocktails..."
+              className="border border-gray-300 rounded-lg p-2 w-90 focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
+            />
+            <button
+              type="submit"
+              className="bg-[#a984ee] text-white rounded-lg px-4 py-2 hover:bg-[#9171cb] transition"
+            >
+              Search
+            </button>
+          </form>
         </main>
         <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center p-4 mt-25">
           <span className="flex items-center gap-2">
