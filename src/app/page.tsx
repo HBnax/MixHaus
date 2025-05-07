@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Home() {
+export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,7 +54,7 @@ export default async function Home() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for cocktails..."
-              className="border border-gray-300 rounded-lg p-2 w-90 focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
+              className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
             />
             <button
               type="submit"
