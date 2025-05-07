@@ -6,7 +6,7 @@ export default function About() {
         <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
             <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[120px] p-4 z-10">
                 <div className="flex items-center gap-2">
-                    <Image 
+                   <Image 
                         src="/mixhaus.svg"
                         alt="Mixhaus logomark"
                         width={100}

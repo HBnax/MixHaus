@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Database, Drink } from "./Database";
@@ -8,21 +8,39 @@ import { Database, Drink } from "./Database";
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Drink[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
+  const handleSearch = async (query: string) => {
+    if (!query.trim()){
+      setSearchResults([]);
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
-      const result = await Database.getCocktailsByName(searchQuery.trim());
-      setSearchResults(result.drinks || []);
+      const result = await Database.getCocktailsByName(query.trim());
+      const filteredResults = (result.drinks || []).filter((drink: Drink) => 
+      drink.strDrink.toLowerCase().startsWith(query.toLowerCase())
+    );
+      setSearchResults(filteredResults || []);
     } catch (error) {
       console.error("Search failed:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      handleSearch(searchQuery);
+    }, 10);
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchQuery]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 mb-[50] gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[120px] p-4 z-10">
         <div className="flex items-center gap-2">
           <Image
@@ -50,9 +68,9 @@ export default function Home() {
 
       <div className="w-full h-[3px] bg-[#a984ee] absolute top-[120px]"></div>
 
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <div className="flex flex-col gap-4">
+      <section className="flex flex-col gap-[32px] min-h-[300px] row-start-2 items-start justify-start sm:items-start mt-12 mb-[50]">
+        <div className="text-center">
+          <div className="flex flex-col gap-4 justify-center items-center">
             <h1 className="text-4xl font-bold text-center">
               Welcome to MixHaus
             </h1>
@@ -61,12 +79,17 @@ export default function Home() {
             </p>
           </div>
         </div>
-
-        <form onSubmit={handleSearch} className="flex items-center gap-2 mt-8">
+        <form
+          onSubmit={(query) => {
+          query.preventDefault();
+          handleSearch(searchQuery);
+          }}
+          className="flex items-center gap-2 mt-8"
+        >
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(query) => setSearchQuery(query.target.value)}
             placeholder="Search for cocktails..."
             className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
           />
@@ -77,23 +100,40 @@ export default function Home() {
             Search
           </button>
         </form>
-        {searchResults.length > 0 && (
-          <ul className="mt-6 space-y-4">
-            {searchResults.map((drink: Drink) => (
-              <li key={drink.idDrink} className="border p-4 rounded-lg">
-                <h2 className="font-bold text-xl">{drink.strDrink}</h2>
-                <Image
-                  src={drink.strDrinkThumb}
-                  alt={drink.strDrink}
-                  width={100}
-                  height={100}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center p-4 mt-25">
+      </section>
+
+      <div className="h-100"></div>
+
+      <section className="w-full min-h-[200px] flex flex-col items-center mt-10">
+        {isLoading && <p className="text-gray-500"> Loading...</p>}
+
+          {!isLoading && searchResults.length > 0 ? (
+            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              {searchResults.map((drink: Drink) => (
+                <li key={drink.idDrink} className="border p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                  <Image
+                    src={drink.strDrinkThumb}
+                    alt={drink.strDrink}
+                    width={100}
+                    height={100}
+                    className="rounded-lg"
+                  />
+                  <h2 className="font-bold text-xl mt-2">{drink.strDrink}</h2>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            !isLoading && searchQuery && (
+              <p className ="text-gray-500">
+                No results found for "{searchQuery}"
+              </p>
+            )
+          )}
+        </section>
+
+      <div className="h-40"></div>
+
+      <footer className="flex gap-[14px] flex-wrap items-center justify-center">
         <span className="flex items-center gap-2">Mix. Sip. Repeat.</span>
         <Link
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 hover:text-[#c2a9f5]"
