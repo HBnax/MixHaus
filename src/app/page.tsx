@@ -68,72 +68,69 @@ export default function Home() {
 
       <div className="w-full h-[3px] bg-[#a984ee] absolute top-[120px]"></div>
 
-      <section className="flex flex-col gap-[32px] min-h-[300px] row-start-2 items-start justify-start sm:items-start mt-12 mb-[50]">
-        <div className="text-center">
-          <div className="flex flex-col gap-4 justify-center items-center">
-            <h1 className="text-4xl font-bold text-center">
-              Welcome to MixHaus
-            </h1>
-            <p className="text-lg">
-              Your one-stop destination for the best cocktail recipes.
-            </p>
-          </div>
-        </div>
-        <form
-          onSubmit={(query) => {
-          query.preventDefault();
-          handleSearch(searchQuery);
-          }}
-          className="flex items-center gap-2 mt-8"
-        >
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(query) => setSearchQuery(query.target.value)}
-            placeholder="Search for cocktails..."
-            className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
-          />
-          <button
-            type="submit"
-            className="bg-[#a984ee] text-white rounded-lg px-4 py-2 hover:bg-[#9171cb] transition"
-          >
-            Search
-          </button>
-        </form>
-      </section>
-
-      <div className="h-100"></div>
-
-      <section className="w-full min-h-[200px] flex flex-col items-center mt-10">
-        {isLoading && <p className="text-gray-500"> Loading...</p>}
-
-          {!isLoading && searchResults.length > 0 ? (
-            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-              {searchResults.map((drink: Drink) => (
-                <li key={drink.idDrink} className="border p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                  <Image
-                    src={drink.strDrinkThumb}
-                    alt={drink.strDrink}
-                    width={100}
-                    height={100}
-                    className="rounded-lg"
-                  />
-                  <h2 className="font-bold text-xl mt-2">{drink.strDrink}</h2>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            !isLoading && searchQuery && (
-              <p className ="text-gray-500">
-                No results found for "{searchQuery}"
+      <main className="row-start-2 w-full flex flex-col items-center gap-16">
+        <section className="flex flex-col gap-[32px] row-start-2 items-start justify-start sm:items-start mt-12">
+          <div className="text-center">
+            <div className="flex flex-col gap-4 justify-center items-center">
+              <h1 className="text-4xl font-bold text-center">
+                Welcome to MixHaus
+              </h1>
+              <p className="text-lg">
+                Your one-stop destination for the best cocktail recipes.
               </p>
-            )
-          )}
+            </div>
+          </div>
+          <form
+            onSubmit={(query) => {
+            query.preventDefault();
+            handleSearch(searchQuery);
+            }}
+            className="flex items-center gap-2 mt-8"
+          >
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(query) => setSearchQuery(query.target.value)}
+              placeholder="Search for cocktails..."
+              className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
+            />
+            <button
+              type="submit"
+              className="bg-[#a984ee] text-white rounded-lg px-4 py-2 hover:bg-[#9171cb] transition"
+            >
+              Search
+            </button>
+          </form>
         </section>
 
-      <div className="h-40"></div>
+        <section className="w-full min-h-[200px] max-w-[800px] text-center items-center mt-2">
+          {isLoading && <p className="text-gray-500"> Loading...</p>}
 
-      <footer className="flex gap-[14px] flex-wrap items-center justify-center">
+            {!isLoading && searchResults.length > 0 ? (
+              <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                {searchResults.map((drink: Drink) => (
+                  <li key={drink.idDrink} className="border p-4 rounded-lg flex flex-col items-center justify-center text-center">
+                    <Image
+                      src={drink.strDrinkThumb}
+                      alt={drink.strDrink}
+                      width={100}
+                      height={100}
+                      className="rounded-lg"
+                    />
+                    <h2 className="font-bold text-xl mt-2">{drink.strDrink}</h2>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              !isLoading && searchQuery && (
+                <p className ="text-gray-500">
+                  No results found for "{searchQuery}"
+                </p>
+              )
+            )}
+        </section>
+      </main>
+      <footer className="row-start-3 flex gap-[14px] flex-wrap items-center justify-center mt-auto">
         <span className="flex items-center gap-2">Mix. Sip. Repeat.</span>
         <Link
           className="flex items-center gap-2 hover:underline hover:underline-offset-4 hover:text-[#c2a9f5]"
