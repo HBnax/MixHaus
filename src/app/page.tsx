@@ -40,7 +40,7 @@ export default function Home() {
   }, [searchQuery]);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 mb-[50] gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 mb-[50] gap-16 sm:p-20">
       <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[120px] p-4 z-10">
         <div className="flex items-center gap-2">
           <Image
@@ -53,29 +53,18 @@ export default function Home() {
             <Link href="/">MixHaus</Link>
           </span>
         </div>
-        <div
-          className="flex items-center"
-          style={{ marginTop: "30px", marginRight: "20px" }}
-        >
-          <Image
-            src="/glassIcon.svg"
-            alt="Mixhaus logomark"
-            width={30}
-            height={30}
-          />
-        </div>
       </header>
 
       <div className="w-full h-[3px] bg-[#a984ee] absolute top-[120px]"></div>
 
-      <main className="row-start-2 w-full flex flex-col items-center gap-16">
-        <section className="flex flex-col gap-[32px] row-start-2 items-start justify-start sm:items-start mt-12">
-          <div className="text-center">
-            <div className="flex flex-col gap-4 justify-center items-center">
-              <h1 className="text-4xl font-bold text-center">
+      <main className="row-start-2 w-full flex flex-col items-center text-center justify-center gap-16">
+        <section className="flex flex-col gap-[32px] row-start-2 items-center justify-center content-center text-center mt-12">
+          <div className="text-center items-center justify-center">
+            <div className="flex flex-col gap-4 justify-center items-center text-center">
+              <h1 className="text-4xl font-bold text-center w-full">
                 Welcome to MixHaus
               </h1>
-              <p className="text-lg">
+              <p className="text-lg font-[family-name:helvetica] text-center w-full">
                 Your one-stop destination for the best cocktail recipes.
               </p>
             </div>
@@ -92,7 +81,7 @@ export default function Home() {
               value={searchQuery}
               onChange={(query) => setSearchQuery(query.target.value)}
               placeholder="Search for cocktails..."
-              className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee]"
+              className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee] font-[family-name:helvetica]"
             />
             <button
               type="submit"
@@ -109,15 +98,17 @@ export default function Home() {
             {!isLoading && searchResults.length > 0 ? (
               <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                 {searchResults.map((drink: Drink) => (
-                  <li key={drink.idDrink} className="border p-4 rounded-lg flex flex-col items-center justify-center text-center">
-                    <Image
-                      src={drink.strDrinkThumb}
-                      alt={drink.strDrink}
-                      width={100}
-                      height={100}
-                      className="rounded-lg"
-                    />
-                    <h2 className="font-bold text-xl mt-2">{drink.strDrink}</h2>
+                  <li key={drink.idDrink} className="border p-3 rounded-lg flex flex-col items-center justify-center text-center">
+                    <button className="w-full h-full flex flex-col items-center justify-center text-center transition">
+                      <Image
+                        src={drink.strDrinkThumb}
+                        alt={drink.strDrink}
+                        width={100}
+                        height={100}
+                        className="rounded-lg"
+                      />
+                      <h2 className="font-bold text-xl mt-2">{drink.strDrink}</h2>
+                    </button>
                   </li>
                 ))}
               </ul>
