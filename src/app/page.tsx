@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Database, Drink } from "./Database";
+import { Database } from "./Database";
+import { Drink } from "./Drink";
+import { DrinkHierarchy } from "./ResultHierarchy";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,10 +22,9 @@ export default function Home() {
 
     try {
       const result = await Database.getCocktailsByName(query.trim());
-      const filteredResults = (result.drinks || []).filter((drink: Drink) => 
-      drink.strDrink.toLowerCase().startsWith(query.toLowerCase())
-    );
-      setSearchResults(filteredResults || []);
+      const sortedResults = DrinkHierarchy.sort(result.drinks || []);
+      const filteredResults = DrinkHierarchy.filter(sortedResults, query);
+      setSearchResults(filteredResults);
     } catch (error) {
       console.error("Search failed:", error);
     } finally {
