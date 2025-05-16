@@ -1,13 +1,9 @@
-export type Drink = {
-  idDrink: string;
-  strDrink: string;
-  strDrinkThumb: string;
-  [key: string]: any; // 필요 시 더 명확히 정의해도 됨
-};
+import { Drink } from "./Drink";
 
 export type CocktailSearchResult = {
   drinks: Drink[] | null;
 };
+
 export class Database {
   private static baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/";
 
