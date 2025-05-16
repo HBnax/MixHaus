@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Database } from "./Database";
+import { database } from "./Database";
 import { Drink } from "./Drink";
 import { DrinkHierarchy } from "./ResultHierarchy";
 
@@ -21,10 +21,10 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const result = await Database.getCocktailsByName(query.trim());
+      const result = await database.getCocktailsByName(query.trim());
       const sortedResults = DrinkHierarchy.sort(result.drinks || []);
-      const filteredResults = DrinkHierarchy.filter(sortedResults, query);
-      setSearchResults(filteredResults);
+      const actualResults = DrinkHierarchy.filterToStartWithQuery(sortedResults, query);
+      setSearchResults(actualResults);
     } catch (error) {
       console.error("Search failed:", error);
     } finally {

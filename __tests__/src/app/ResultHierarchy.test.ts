@@ -28,26 +28,26 @@ describe('ResultHierarchy', () => {
 
     it('should only include drinks that match the search query', () => {
         const searchQuery = 'Ma';
-        const filteredDrinks = DrinkHierarchy.filter(drinks, searchQuery) as Drink[];
+        const filteredDrinks = DrinkHierarchy.filterToStartWithQuery(drinks, searchQuery) as Drink[];
         const drinkNames = filteredDrinks.map(drink => drink.strDrink);
         expect(drinkNames).toEqual(['Margarita', 'Masala Chai']);
     });
 
     it('should include drinks that match the search query regardless of case', () => {
         const searchQuery = 'mA';
-        const filteredDrinks = DrinkHierarchy.filter(drinks, searchQuery) as Drink[];
+        const filteredDrinks = DrinkHierarchy.filterToStartWithQuery(drinks, searchQuery) as Drink[];
         const drinkNames = filteredDrinks.map(drink => drink.strDrink);
         expect(drinkNames).toEqual(['Margarita', 'Masala Chai']);
     });
 
     it('should return an empty array if no drinks are provided', () => {
         const searchQuery = 'Margarita';
-        const filteredDrinks = DrinkHierarchy.filter([], searchQuery) as Drink[];
+        const filteredDrinks = DrinkHierarchy.filterToStartWithQuery([], searchQuery) as Drink[];
         expect(filteredDrinks).toEqual([]);
     });
 
     it('should return an empty array the search query does not exist', () => {
-        const filteredDrinks = DrinkHierarchy.filter(drinks, '') as Drink[];
+        const filteredDrinks = DrinkHierarchy.filterToStartWithQuery(drinks, '') as Drink[];
         expect(filteredDrinks).toEqual([]);
     });
 });
