@@ -1,8 +1,5 @@
 import { Drink } from "./Drink";
-
-export type CocktailSearchResult = {
-  drinks: Drink[] | null;
-};
+import { CocktailSearchResult } from "./CocktailSearchResult";
 
 class Database {
   private static instance: Database;
@@ -53,6 +50,10 @@ class Database {
     return await this.query("list.php?c=list");
   }
 
+  async getAlcoholicCategories(): Promise<unknown> {
+    return await this.query("list.php?a=list");
+  }
+
   async getIngredients(): Promise<unknown> {
     return await this.query("list.php?i=list");
   }
@@ -61,7 +62,7 @@ class Database {
     ingredients: string[]
   ): Promise<{ drinks: unknown[] }> {
     const results = await Promise.all(ingredients.map((ingredient) => 
-      this.query(`filter.php?i=${ingredient}`) as Promise<{drinks: { idDrink: string }[];}>)
+      this.query(`filter.php?i=${ingredient}`) as Promise<{drinks: Drink[];}>)
     );
 
     for (let resultIndex = 1; resultIndex < results.length; resultIndex++) {

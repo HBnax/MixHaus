@@ -55,6 +55,11 @@ describe('Database', () => {
         expect(result.drinks.some(drink => drink.strCategory === 'Ordinary Drink')).toBe(true);
     });
 
+    it('should fetch a list of alcohol categories', async () => {
+        const result = await database.getAlcoholicCategories() as { drinks: { strAlcoholic: string }[] };
+        expect(result.drinks.some(drink => drink.strAlcoholic === 'Alcoholic')).toBe(true);
+    });
+
     it('should fetch a list of ingredients', async () => {
         const result = await database.getIngredients() as { drinks: { strIngredient1: string }[] };
         expect(result.drinks.some(drink => drink.strIngredient1 === 'Vodka')).toBe(true);

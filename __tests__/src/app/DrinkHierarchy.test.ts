@@ -1,7 +1,7 @@
-import { DrinkHierarchy } from "../../../src/app/ResultHierarchy";
+import { DrinkHierarchy } from "../../../src/app/DrinkHierarchy";
 import { Drink } from "../../../src/app/Drink";
 
-describe('ResultHierarchy', () => {
+describe('DrinkHierarchy', () => {
     const drinks = [
         { idDrink: 1, strDrink: 'Margarita', strCategory: 'Cocktail', strDrinkThumb: 'url1' },
         { idDrink: 2, strDrink: 'Mojito', strCategory: 'Cocktail', strDrinkThumb: 'url2' },
