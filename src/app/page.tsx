@@ -3,14 +3,16 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Database } from "./Database";
+import { database } from "./Database";
 import { Drink } from "./Drink";
-import { DrinkHierarchy } from "./ResultHierarchy";
+import { DrinkHierarchy } from "./DrinkHierarchy";
+import { DrinkFilter } from "./DrinkFilter";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Drink[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const drinkFilter = new DrinkFilter();
 
   const handleSearch = async (query: string) => {
     if (!query.trim()){
@@ -21,9 +23,10 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const result = await Database.getCocktailsByName(query.trim());
+      const result = await database.getCocktailsByName(query.trim());
       const sortedResults = DrinkHierarchy.sort(result.drinks || []);
-      const filteredResults = DrinkHierarchy.filter(sortedResults, query);
+      const actualResults = DrinkHierarchy.filterToStartWithQuery(sortedResults, query);
+      const filteredResults = drinkFilter.filter(actualResults);
       setSearchResults(filteredResults);
     } catch (error) {
       console.error("Search failed:", error);
@@ -72,8 +75,8 @@ export default function Home() {
           </div>
           <form
             onSubmit={(query) => {
-            query.preventDefault();
-            handleSearch(searchQuery);
+              query.preventDefault();
+              handleSearch(searchQuery);
             }}
             className="flex items-center gap-2 mt-8"
           >
