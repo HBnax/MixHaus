@@ -20,19 +20,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{fontFamily: "Copperplate, var(--font-geist-sans), sans-serif"}}
-      >
-        {children}
+      <body className="relative bg-[#0a0a0a] text-white min-h-screen overflow-x-hidden">
+        <div className="bg-animated-gradient"></div> {/* Gradient layer */}
+        <div className="relative z-10">{children}</div> {/* Content layer */}
       </body>
     </html>
   );
 }
+
+
