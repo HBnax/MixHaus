@@ -12,9 +12,47 @@
   font-style: normal;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: 'Copperplate', sans-serif;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@keyframes shimmerBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-animated-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    circle at center,
+    #a984ee44 0%,   /* increased opacity (from 22 to 44) */
+    #a984ee11 40%,  /* softer ring to spread purple wider */
+    transparent 80%
+  );
+  background-size: 300% 300%;
+  animation: shimmerBackground 20s ease infinite;
+  pointer-events: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
