@@ -63,7 +63,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 
 ## 🧩 Jira & Artifacts
 
-- 📊 **[Jira Board]** ADD HERE!
+- 📊 **[Jira Board]** [ADD HERE!](https://chapman-team-x92v0bvq.atlassian.net/jira/software/projects/SCRUM/boards/1?atlOrigin=eyJpIjoiNWE4MzRkZWJiY2Q5NDU2ZmExNGY2YzgwMTkyMDA1YTEiLCJwIjoiaiJ9)
 - 📑 **Epics & User Stories:** Tracked and maintained in Jira
 - ✅ Acceptance Criteria defined for each story
 - 🎥 Sprint demo presentations held in class
