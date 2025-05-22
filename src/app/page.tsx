@@ -111,14 +111,6 @@ export default function Home() {
               width={24}
               height={24}
             />
-            <select
-              onChange={(e) => setTheme(e.target.value)}
-              value={theme}
-              className="bg-transparent text-[#a984ee] border border-[#a984ee] px-2 py-1 rounded"
-            >
-              <option value="dark">Dark</option>
-              <option value="light">Light</option>
-            </select>
           </div>
         </header>
 
