@@ -77,7 +77,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 | **Kalin Richardson** | Drink detail UI, category display, search logic, visual polish                   |
 | **Brian Cassriel**     | Database API connections & formatting, filter strategy system (includes tests)                |
 | **Halle Broadnax**   | Home page layout, search bar UI & functionality, search results layout                  |
-| **[Teammate 4]**     | Contributions here                |
+| **Daniel Min**     | Search method, logo animation                |
 
 ---
 
