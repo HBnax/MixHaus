@@ -27,7 +27,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 ## 🧩 Design Patterns Used
 
 - **Strategy Pattern** – Used to encapsulate filtering strategies like `AlcoholFilterStrategy` and `CategoryFilterStrategy`.
-- **Observer Pattern** – Implemented via a `LogoObserver` for dynamic UI reactions to scroll and user interaction.
+- **Observer Pattern** – Implemented via a `LogoObserver` for a dynamic UI reaction to hovering over the MixHaus logo.
 - **Singleton Pattern** – Used to ensure only a single instance of the `Database`.
 
 ---
@@ -84,7 +84,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 ## 🧾 How to Run Locally
 
 ```bash
-git clone https://github.com/your-org/MixHaus.git
+git clone https://github.com/HBnax/MixHaus.git
 cd MixHaus
 npm install
 npm run dev
