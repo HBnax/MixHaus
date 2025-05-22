@@ -96,10 +96,25 @@ Then, open your browser and navigate to `http://localhost:3000`.
 
 ## 📸 Screenshots
 
-> Insert screenshots: ADD HERE!
-> - Homepage with search and filters
-> - Drink detail view
-> - Filter interaction examples
+#### 🏠 Homepage with Search and Filters  
+- Displays logo, animated header, search input, and dynamic filter buttons.
+  
+![Homepage](./public/screenshots/MixHausHomePage.png)
+![Filter Chips](./public/screenshots/ResponsiveFilters.png)
+
+---
+
+#### 🔍 Search Result Grid  
+- Shows drink cards after performing a search query.
+  
+![Search Results](./public/screenshots/SearchDisplay.png)
+
+---
+
+#### 🍹 Drink Detail Page  
+- Displays drink image, name, instructions, ingredients, category, glass type, and alcohol info.
+  
+![Drink Detail](./public/screenshots/DrinkDisplay.png)
 
 ---
 
