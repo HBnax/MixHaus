@@ -7,8 +7,8 @@ import { database } from "./Database";
 import { Drink } from "./Drink";
 import { DrinkHierarchy } from "./DrinkHierarchy";
 import { DrinkFilter } from "./DrinkFilter";
-import { AlcoholicFilterStrategy } from "./AlcoholFilterStrategy";
-import { CategoryFilterStrategy } from "./CategoryFilterStrategy";
+import { IFilterStrategy } from "./IFilterStrategy";
+import { DrinkFilters } from "./DrinkFilters";
 import MouseTracker from "./MouseTracker";
 import LogoObserver from "./LogoObserver";
 
@@ -24,38 +24,25 @@ export default function Home() {
     document.documentElement.className = theme;
   }, [theme]);
 
-  const filters = [
-    {
-      label: "Alcoholic",
-      strategy: new AlcoholicFilterStrategy(),
-      type: "Alcoholic",
-    },
-    {
-      label: "Non-alcoholic",
-      strategy: new AlcoholicFilterStrategy(),
-      type: "Non alcoholic",
-    },
-    {
-      label: "Cocktail",
-      strategy: new CategoryFilterStrategy(),
-      type: "Cocktail",
-    },
-    {
-      label: "Ordinary Drink",
-      strategy: new CategoryFilterStrategy(),
-      type: "Ordinary Drink",
-    },
-  ];
+  const [filters, setFilters] = useState<{ name: string; strategy: IFilterStrategy }[]>([]);
+  useEffect(() => {
+  const fetchFilters = async () => {
+    const drinkFilters = new DrinkFilters();
+    await drinkFilters.populateFilters();
+    setFilters(drinkFilters.getAllFilters());
+    };
+    fetchFilters();
+  }, []);
 
-  const toggleFilter = (label: string, strategy: any, type: string) => {
+  const toggleFilter = (name: string, strategy: IFilterStrategy) => {
     const updatedFilters = [...selectedFilters];
-    const index = selectedFilters.indexOf(label);
+    const index = selectedFilters.indexOf(name);
     if (index > -1) {
       updatedFilters.splice(index, 1);
-      drinkFilterRef.current.removeFilterStrategy(type);
+      drinkFilterRef.current.removeFilterStrategy(name);
     } else {
-      updatedFilters.push(label);
-      drinkFilterRef.current.addFilterStrategy(strategy, type);
+      updatedFilters.push(name);
+      drinkFilterRef.current.addFilterStrategy(strategy, name);
     }
     setSelectedFilters(updatedFilters);
     handleSearch(searchQuery);
@@ -138,18 +125,22 @@ export default function Home() {
               }}
               className="flex items-center gap-2 mt-4"
             >
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(query) => setSearchQuery(query.target.value)}
-                placeholder="Search for cocktails..."
-                className="border border-gray-300 rounded-lg p-2 w-[375px] focus:outline-none focus:ring-1 focus:ring-[#a984ee] font-[family-name:helvetica] bg-black text-white"
-              />
+              Search
+            </button>
+          </form>
+
+          <div className="grid grid-cols-2 sm:grid-cols-7 gap-1 sm:gap-2 justify-items-center mt-6 px-4">
+            {filters.map(({ name, strategy }) => (
               <button
-                type="submit"
-                className="bg-[#a984ee] text-white rounded-lg px-4 py-2 hover:bg-[#9171cb] transition"
+                key={name}
+                className={`px-4 py-1 rounded-full border transition-all duration-200 text-sm font-medium ${
+                  selectedFilters.includes(name)
+                    ? "bg-[#a984ee33] border-[#a984ee] text-white"
+                    : "bg-[#1c1c1c] border-gray-600 text-white hover:bg-[#2c2c2c]"
+                }`}
+                onClick={() => toggleFilter(name, strategy)}
               >
-                Search
+                {name}
               </button>
             </form>
 
