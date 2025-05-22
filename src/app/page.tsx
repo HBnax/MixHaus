@@ -1,3 +1,5 @@
+// Fixes syntax errors in your provided page.tsx
+
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -26,10 +28,10 @@ export default function Home() {
 
   const [filters, setFilters] = useState<{ name: string; strategy: IFilterStrategy }[]>([]);
   useEffect(() => {
-  const fetchFilters = async () => {
-    const drinkFilters = new DrinkFilters();
-    await drinkFilters.populateFilters();
-    setFilters(drinkFilters.getAllFilters());
+    const fetchFilters = async () => {
+      const drinkFilters = new DrinkFilters();
+      await drinkFilters.populateFilters();
+      setFilters(drinkFilters.getAllFilters());
     };
     fetchFilters();
   }, []);
@@ -57,10 +59,7 @@ export default function Home() {
     try {
       const result = await database.getCocktailsByName(query.trim());
       const sortedResults = DrinkHierarchy.sort(result.drinks || []);
-      const actualResults = DrinkHierarchy.filterToStartWithQuery(
-        sortedResults,
-        query
-      );
+      const actualResults = DrinkHierarchy.filterToStartWithQuery(sortedResults, query);
       const filteredResults = drinkFilterRef.current.filter(actualResults);
       setSearchResults(filteredResults);
     } catch (error) {
@@ -84,39 +83,26 @@ export default function Home() {
         <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[100px] p-4 z-10">
           <div className="flex items-center gap-2">
             <LogoObserver />
-            <span
-              className="text-xl font-bold"
-              style={{ fontFamily: "Copperplate, sans-serif" }}
-            >
+            <span className="text-xl font-bold" style={{ fontFamily: "Copperplate, sans-serif" }}>
               <Link href="/">MixHaus</Link>
             </span>
           </div>
           <div className="flex items-center mt-[24px] mr-[20px] gap-4">
-            <Image
-              src="/glassIcon.svg"
-              alt="Glass Icon"
-              width={24}
-              height={24}
-            />
+            <Image src="/glassIcon.svg" alt="Glass Icon" width={24} height={24} />
           </div>
         </header>
 
-        <div className="w-full h-[3px] bg-[#a984ee] absolute top-[120px]"></div>
+        <div className="w-full h-[3px] bg-[#a984ee] absolute top-[120px]" />
 
         <main className="row-start-2 w-full flex flex-col items-center text-center justify-center gap-10">
           <section className="flex flex-col gap-[32px] row-start-2 items-center justify-center content-center text-center mt-12">
-            <div className="text-center items-center justify-center">
-              <div className="flex flex-col gap-4 justify-center items-center text-center">
-                <h1
-                  className="text-2xl sm:text-4xl font-bold tracking-widest text-center"
-                  style={{ fontFamily: "Copperplate, sans-serif" }}
-                >
-                  Welcome to MixHaus
-                </h1>
-                <p className="text-lg font-[family-name:helvetica] text-center w-full">
-                  Your one-stop destination for the best cocktail recipes.
-                </p>
-              </div>
+            <div className="flex flex-col gap-4 justify-center items-center text-center">
+              <h1 className="text-2xl sm:text-4xl font-bold tracking-widest text-center" style={{ fontFamily: "Copperplate, sans-serif" }}>
+                Welcome to MixHaus
+              </h1>
+              <p className="text-lg font-[family-name:helvetica] text-center w-full">
+                Your one-stop destination for the best cocktail recipes.
+              </p>
             </div>
             <form
               onSubmit={(query) => {
@@ -125,37 +111,33 @@ export default function Home() {
               }}
               className="flex items-center gap-2 mt-4"
             >
-              Search
-            </button>
-          </form>
-
-          <div className="grid grid-cols-2 sm:grid-cols-7 gap-1 sm:gap-2 justify-items-center mt-6 px-4">
-            {filters.map(({ name, strategy }) => (
+              <input
+                type="text"
+                placeholder="Search for cocktails..."
+                className="px-4 py-2 rounded-md border border-gray-600 bg-black text-white"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
               <button
-                key={name}
-                className={`px-4 py-1 rounded-full border transition-all duration-200 text-sm font-medium ${
-                  selectedFilters.includes(name)
-                    ? "bg-[#a984ee33] border-[#a984ee] text-white"
-                    : "bg-[#1c1c1c] border-gray-600 text-white hover:bg-[#2c2c2c]"
-                }`}
-                onClick={() => toggleFilter(name, strategy)}
+                type="submit"
+                className="bg-[#a984ee] text-white px-4 py-2 rounded-md hover:bg-[#c2a9f5] transition"
               >
-                {name}
+                Search
               </button>
             </form>
 
-            <div className="flex flex-wrap justify-center items-center gap-2 mt-4">
-              {filters.map(({ label, strategy, type }) => (
+            <div className="grid grid-cols-2 sm:grid-cols-7 gap-1 sm:gap-2 justify-items-center mt-6 px-4">
+              {filters.map(({ name, strategy }) => (
                 <button
-                  key={label}
+                  key={name}
                   className={`px-4 py-1 rounded-full border transition-all duration-200 text-sm font-medium ${
-                    selectedFilters.includes(label)
+                    selectedFilters.includes(name)
                       ? "bg-[#a984ee33] border-[#a984ee] text-white"
                       : "bg-[#1c1c1c] border-gray-600 text-white hover:bg-[#2c2c2c]"
                   }`}
-                  onClick={() => toggleFilter(label, strategy, type)}
+                  onClick={() => toggleFilter(name, strategy)}
                 >
-                  {label}
+                  {name}
                 </button>
               ))}
             </div>
@@ -186,20 +168,14 @@ export default function Home() {
                         height={100}
                         className="rounded-lg"
                       />
-                      <h2 className="font-bold text-xl mt-2">
-                        {drink.strDrink}
-                      </h2>
+                      <h2 className="font-bold text-xl mt-2">{drink.strDrink}</h2>
                     </Link>
                   </li>
                 ))}
               </ul>
             ) : (
               !isLoading &&
-              searchQuery && (
-                <p className="text-gray-500">
-                  No results found for "{searchQuery}"
-                </p>
-              )
+              searchQuery && <p className="text-gray-500">No results found for "{searchQuery}"</p>
             )}
           </section>
         </main>
