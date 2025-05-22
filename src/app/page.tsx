@@ -7,8 +7,8 @@ import { database } from "./Database";
 import { Drink } from "./Drink";
 import { DrinkHierarchy } from "./DrinkHierarchy";
 import { DrinkFilter } from "./DrinkFilter";
-import { AlcoholicFilterStrategy } from "./AlcoholFilterStrategy";
-import { CategoryFilterStrategy } from "./CategoryFilterStrategy";
+import { IFilterStrategy } from "./IFilterStrategy";
+import { DrinkFilters } from "./DrinkFilters";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -22,22 +22,23 @@ export default function Home() {
     document.documentElement.className = theme;
   }, [theme]);
 
-  const filters = [
-  { label: "Alcoholic", strategy: new AlcoholicFilterStrategy(), type: "Alcoholic" },
-  { label: "Non-alcoholic", strategy: new AlcoholicFilterStrategy(), type: "Non alcoholic" },
-  { label: "Cocktail", strategy: new CategoryFilterStrategy(), type: "Cocktail" },
-  { label: "Ordinary Drink", strategy: new CategoryFilterStrategy(), type: "Ordinary Drink" },
-  ];
+  let filters: { name: string; strategy: IFilterStrategy }[] = [];
+  const updateFilters = async () => {
+    const drinkFilters = new DrinkFilters();
+    await drinkFilters.populateFilters();
+    filters = drinkFilters.getAllFilters();
+  };
+  updateFilters();
 
-  const toggleFilter = (label: string, strategy: any, type: string) => {
+  const toggleFilter = (name: string, strategy: IFilterStrategy) => {
     const updatedFilters = [...selectedFilters];
-    const index = selectedFilters.indexOf(label);
+    const index = selectedFilters.indexOf(name);
     if (index > -1) {
       updatedFilters.splice(index, 1);
-      drinkFilterRef.current.removeFilterStrategy(type);
+      drinkFilterRef.current.removeFilterStrategy(name);
     } else {
-      updatedFilters.push(label);
-      drinkFilterRef.current.addFilterStrategy(strategy, type);
+      updatedFilters.push(name);
+      drinkFilterRef.current.addFilterStrategy(strategy, name);
     }
     setSelectedFilters(updatedFilters);
     handleSearch(searchQuery);
@@ -134,17 +135,17 @@ export default function Home() {
           </form>
 
           <div className="flex flex-wrap justify-center items-center gap-2 mt-4">
-            {filters.map(({ label, strategy, type }) => (
+            {filters.map(({ name, strategy }) => (
               <button
-                key={label}
+                key={name}
                 className={`px-4 py-1 rounded-full border transition-all duration-200 text-sm font-medium ${
-                  selectedFilters.includes(label)
+                  selectedFilters.includes(name)
                     ? "bg-[#a984ee33] border-[#a984ee] text-white"
                     : "bg-[#1c1c1c] border-gray-600 text-white hover:bg-[#2c2c2c]"
                 }`}
-                onClick={() => toggleFilter(label, strategy, type)}
+                onClick={() => toggleFilter(name, strategy)}
               >
-                {label}
+                {name}
               </button>
             ))}
           </div>

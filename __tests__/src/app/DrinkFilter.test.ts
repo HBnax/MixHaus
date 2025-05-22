@@ -1,13 +1,14 @@
 import { AlcoholicFilterStrategy } from '../../../src/app/AlcoholFilterStrategy';
 import { CategoryFilterStrategy } from '../../../src/app/CategoryFilterStrategy';
 import { DrinkFilter } from '../../../src/app/DrinkFilter';
+import { Drink } from '../../../src/app/Drink';
 
 describe("DrinkFilter", () => {
     it("should not filter out drinks when no filter is applied", () => {
         const input = [
             { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
             { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" },
-        ];
+        ] as Drink[];
 
         const filter = new DrinkFilter();
         const result = filter.filter(input);
@@ -19,7 +20,7 @@ describe("DrinkFilter", () => {
         const input = [
             { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
             { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" },
-        ];
+        ] as Drink[];
 
         const filter = new DrinkFilter();
         filter.addFilterStrategy(new CategoryFilterStrategy(), "Cocktail");
@@ -34,7 +35,7 @@ describe("DrinkFilter", () => {
         const input = [
             { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
             { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" },
-        ];
+        ] as Drink[];
 
         const filter = new DrinkFilter();
         filter.addFilterStrategy(new CategoryFilterStrategy(), "Cocktail");
@@ -54,7 +55,7 @@ describe("DrinkFilter", () => {
             { idDrink: "3", strDrink: "Margarita", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
             { idDrink: "4", strDrink: "Pina Colada", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Optional alcohol" },
             { idDrink: "5", strDrink: "Virgin Pina Colada", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" }
-        ];
+        ] as Drink[];
 
         const filter = new DrinkFilter();
         filter.addFilterStrategy(new AlcoholicFilterStrategy(), "Alcoholic");
