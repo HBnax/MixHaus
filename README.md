@@ -74,7 +74,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 
 | Name               | Key Contributions                                                                 |
 |--------------------|------------------------------------------------------------------------------------|
-| **Kalin Richardson** | Drink detail UI, search logic, filter refactor, visual polish, strategy pattern integration |
+| **Kalin Richardson** | Drink detail UI, category display, search logic, visual polish                   |
 | **[Teammate 2]**     | Filter strategy system, testing, light/dark toggle, responsiveness                |
 | **[Teammate 3]**     | Jira lead, deployment, agile documentation, observer pattern                     |
 | **[Teammate 4]**     | Drink hierarchy logic, animation enhancements, testing automation                |
