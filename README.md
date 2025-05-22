@@ -1,26 +1,117 @@
-# MixHaus
+# 🥂 MixHaus 🍸
 
-A simple website designed to search for cocktail recipes using the [TheCocktailDB API](https://www.thecocktaildb.com/).
+**A modern cocktail discovery app built using TypeScript, React (Next.js), and TailwindCSS.**  
+Crafted by Halle Broadnax, Brian Cassriel, Kalin Richardson, and Daniel Min for SE320, applying Agile principles, software design patterns, TDD, and other factors from the course.
 
-## How To Run
+---
 
-### Running Site Locally
+## 🚀 Features
+- 🔍 **Live Search:** Search for cocktails by name using TheCocktailDB API.
+- 🍹 **Filter by Type:** Filter drinks by category or alcoholic content via a strategy pattern.
+- 📄 **Detailed Drink View:** Click on a drink to view ingredients, instructions, glass type, if it is 21+, and images.
+- 💡 **Animated UI:** Motion effects and hover states using Tailwind and React.
+- 📊 **Responsive Layout:** Clean design across all screen sizes.
 
-First, install the npm if you haven't already.
-After run the following command in the root of the project folder to install the dependencies:
-```zsh
+---
+
+## 🧠 Architecture
+
+MixHaus uses a modular **MVVM-inspired structure** with clear separation of concerns:
+
+- **View (UI):** Built with React components and styled with Tailwind.
+- **ViewModel (Logic):** Filters, search hierarchy, and interaction logic.
+- **Model (Data):** Interfaces and classes for `Drink`, API responses, and strategy types.
+
+---
+
+## 🧩 Design Patterns Used
+
+- **Strategy Pattern** – Used to encapsulate filtering strategies like `AlcoholFilterStrategy` and `CategoryFilterStrategy`.
+- **Observer Pattern** – Implemented via a `LogoObserver` for dynamic UI reactions to scroll and user interaction.
+- **Singleton Pattern** – Used in managing filter strategies and drink logic across the app lifecycle.
+
+---
+
+## 🧪 Testing
+
+- **Framework:** `Jest`
+- **Methodology:** Test-Driven Development (TDD)
+- **Coverage:** Unit tests for filter strategies and data processing
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology            | Usage                          |
+|----------------------|---------------------------------|
+| **Next.js**          | Frontend framework & routing   |
+| **TypeScript**       | Type safety & clarity          |
+| **Tailwind CSS**     | Responsive styling & UI        |
+| **Jest**             | Testing framework              |
+| **TheCocktailDB API**| External drink data source     |
+
+---
+
+## 📐 Agile Process
+
+- ✅ **6 Sprints** completed using Jira to track Epics, Stories, and Tasks
+- 📊 **MoSCoW prioritization** and **Fibonacci estimation** to scope work
+- 📅 Daily stand-ups, rotating Scrum Masters
+- 🔄 Sprint Reviews and Retrospectives documented per cycle
+
+---
+
+## 🧩 Jira & Artifacts
+
+- 📊 **[Jira Board]** ADD HERE!
+- 📑 **Epics & User Stories:** Tracked and maintained in Jira
+- ✅ Acceptance Criteria defined for each story
+- 🎥 Sprint demo presentations held in class
+
+---
+
+## 💬 Individual Contributions
+
+| Name               | Key Contributions                                                                 |
+|--------------------|------------------------------------------------------------------------------------|
+| **Kalin Richardson** | Drink detail UI, search logic, filter refactor, visual polish, strategy pattern integration |
+| **[Teammate 2]**     | Filter strategy system, testing, light/dark toggle, responsiveness                |
+| **[Teammate 3]**     | Jira lead, deployment, agile documentation, observer pattern                     |
+| **[Teammate 4]**     | Drink hierarchy logic, animation enhancements, testing automation                |
+
+---
+
+## 🧾 How to Run Locally
+
+```bash
+git clone https://github.com/your-org/MixHaus.git
+cd MixHaus
 npm install
-```
-
-To view the website, run the development server:
-```zsh
+npm i
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Running Tests
+---
 
-To run the tests, use the following command:
-```zsh
-npm test
-```
+## 📸 Screenshots
+
+> Insert screenshots: ADD HERE!
+> - Homepage with search and filters
+> - Drink detail view
+> - Filter interaction examples
+
+---
+
+## 📚 Lessons Learned
+
+- 💡 How to implement common design patterns in real apps
+- 🚀 Scaling frontend logic cleanly with TypeScript and Next.js
+- 🤝 Working collaboratively in agile sprints
+- 🧪 Test-driven development and coverage discipline
+- 🌐 Connecting to and transforming data from real-world APIs
+
+---
+
+## 🎉 Thanks for exploring MixHaus!
+
+🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸
