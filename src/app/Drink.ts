@@ -3,5 +3,8 @@ export type Drink = {
   strDrink: string;
   strCategory: string;
   strDrinkThumb: string;
+  strAlcoholic: string;
+  strGlass: string;
+  strInstructions: string;
   [key: string]: unknown;
 };
