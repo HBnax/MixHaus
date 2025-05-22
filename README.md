@@ -118,6 +118,13 @@ Then, open your browser and navigate to `http://localhost:3000`.
 
 ---
 
+#### Tests
+- All tests pass!
+  
+![Tests](./public/screenshots/TestsGreen.png)
+
+---
+
 ## 📚 Lessons Learned
 
 - 💡 How to implement common design patterns in real apps
