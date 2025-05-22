@@ -11,7 +11,7 @@ export default function About() {
         <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[120px] p-4 z-10">
           <div className="flex items-center gap-2">
             <LogoObserver />
-            <span className="text-lg font-bold">
+            <span className="text-xl font-bold" style={{ fontFamily: "Copperplate, sans-serif" }}>
               <Link href="/">MixHaus</Link>
             </span>
           </div>
