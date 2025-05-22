@@ -28,7 +28,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 
 - **Strategy Pattern** – Used to encapsulate filtering strategies like `AlcoholFilterStrategy` and `CategoryFilterStrategy`.
 - **Observer Pattern** – Implemented via a `LogoObserver` for dynamic UI reactions to scroll and user interaction.
-- **Singleton Pattern** – Used in managing filter strategies and drink logic across the app lifecycle.
+- **Singleton Pattern** – Used to ensure only a single instance of the `Database`.
 
 ---
 
@@ -36,7 +36,7 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 
 - **Framework:** `Jest`
 - **Methodology:** Test-Driven Development (TDD)
-- **Coverage:** Unit tests for filter strategies and data processing
+- **Coverage:** Unit tests for filter strategies and database processing
 
 ---
 
@@ -75,9 +75,9 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 | Name               | Key Contributions                                                                 |
 |--------------------|------------------------------------------------------------------------------------|
 | **Kalin Richardson** | Drink detail UI, category display, search logic, visual polish                   |
-| **[Teammate 2]**     | Filter strategy system, testing, light/dark toggle, responsiveness                |
-| **[Teammate 3]**     | Jira lead, deployment, agile documentation, observer pattern                     |
-| **[Teammate 4]**     | Drink hierarchy logic, animation enhancements, testing automation                |
+| **Brian Cassriel**     | Database API connections & formatting, filter strategy system (includes tests)                |
+| **[Teammate 3]**     | Contributions here                     |
+| **[Teammate 4]**     | Contributions here                |
 
 ---
 
@@ -87,9 +87,10 @@ MixHaus uses a modular **MVVM-inspired structure** with clear separation of conc
 git clone https://github.com/your-org/MixHaus.git
 cd MixHaus
 npm install
-npm i
 npm run dev
 ```
+
+Then, open your browser and navigate to `http://localhost:3000`.
 
 ---
 
@@ -109,9 +110,3 @@ npm run dev
 - 🤝 Working collaboratively in agile sprints
 - 🧪 Test-driven development and coverage discipline
 - 🌐 Connecting to and transforming data from real-world APIs
-
----
-
-## 🎉 Thanks for exploring MixHaus!
-
-🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸🍸
