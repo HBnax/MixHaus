@@ -7,7 +7,7 @@ export default function About() {
             <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[120px] p-4 z-10">
                 <div className="flex items-center gap-2">
                    <Image 
-                        src="/mixhaus.svg"
+                        src="/mixhaus1.svg"
                         alt="Mixhaus logomark"
                         width={100}
                         height={100}

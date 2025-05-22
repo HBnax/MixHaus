@@ -20,7 +20,7 @@ export default async function DrinkPage({ params }: { params: { id: string } }) 
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 mb-[50] gap-16 sm:p-20">
       <header className="absolute top-0 left-0 w-full flex items-start justify-between h-[100px] p-4 z-10">
       <div className="flex items-center gap-2">
-        <Image src="/mixhaus.svg" alt="Mixhaus logomark" width={60} height={60} />
+        <Image src="/mixhaus1.svg" alt="Mixhaus logomark" width={60} height={60} />
         <span
           className="text-xl font-bold"
           style={{ fontFamily: "Copperplate, sans-serif" }}
