@@ -22,13 +22,15 @@ export default function Home() {
     document.documentElement.className = theme;
   }, [theme]);
 
-  let filters: { name: string; strategy: IFilterStrategy }[] = [];
-  const updateFilters = async () => {
+  const [filters, setFilters] = useState<{ name: string; strategy: IFilterStrategy }[]>([]);
+  useEffect(() => {
+  const fetchFilters = async () => {
     const drinkFilters = new DrinkFilters();
     await drinkFilters.populateFilters();
-    filters = drinkFilters.getAllFilters();
-  };
-  updateFilters();
+    setFilters(drinkFilters.getAllFilters());
+    };
+    fetchFilters();
+  }, []);
 
   const toggleFilter = (name: string, strategy: IFilterStrategy) => {
     const updatedFilters = [...selectedFilters];
@@ -134,7 +136,7 @@ export default function Home() {
             </button>
           </form>
 
-          <div className="flex flex-wrap justify-center items-center gap-2 mt-4">
+          <div className="grid grid-cols-2 sm:grid-cols-7 gap-1 sm:gap-2 justify-items-center mt-6 px-4">
             {filters.map(({ name, strategy }) => (
               <button
                 key={name}
