@@ -127,8 +127,8 @@ Then, open your browser and navigate to `http://localhost:3000`.
 
 ## 📚 Lessons Learned
 
-- 💡 How to implement common design patterns in real apps
+- 💡 How to implement common design patterns in realistic contexts
 - 🚀 Scaling frontend logic cleanly with TypeScript and Next.js
 - 🤝 Working collaboratively in agile sprints
-- 🧪 Test-driven development and coverage discipline
+- 🧪 Test-driven development with coverage using Jest
 - 🌐 Connecting to and transforming data from real-world APIs
