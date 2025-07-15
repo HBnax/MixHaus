@@ -18,7 +18,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Drink[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [theme] = useState("dark");
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const drinkFilterRef = useRef(new DrinkFilter());
 
@@ -175,7 +175,7 @@ export default function Home() {
               </ul>
             ) : (
               !isLoading &&
-              searchQuery && <p className="text-gray-500">No results found for "{searchQuery}"</p>
+              searchQuery && <p className="text-gray-500">No results found for &quot;{searchQuery}&quot;</p>
             )}
           </section>
         </main>
