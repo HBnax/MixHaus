@@ -11,14 +11,14 @@ describe("AlcoholFilterStrategy", () => {
     it("should filter out non-alcoholic drinks", () => {
         const input: CocktailSearchResult = {
             drinks: [
-                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
-                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" },
+                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic", strGlass: "Highball glass", strInstructions: "Mix ingredients and serve." },
+                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic", strGlass: "Collins glass", strInstructions: "Mix ingredients and serve chilled." },
             ]
         };
     
         const expectedOutput: CocktailSearchResult = {
             drinks: [
-                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
+                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic", strGlass: "Highball glass", strInstructions: "Mix ingredients and serve." },
             ]
         };
     
@@ -29,13 +29,13 @@ describe("AlcoholFilterStrategy", () => {
     it("should filter out alcoholic drinks", () => {
         const input: CocktailSearchResult = {
             drinks: [
-                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
-                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" }
+                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic", strGlass: "Highball glass", strInstructions: "Mix ingredients and serve." },
+                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic", strGlass: "Collins glass", strInstructions: "Mix ingredients and serve chilled." },
             ]
         };
         const expectedOutput: CocktailSearchResult = {
             drinks: [
-                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" }
+                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic", strGlass: "Collins glass", strInstructions: "Mix ingredients and serve chilled." },
             ]
         };
         const result = filterStrategy.filter(input, "Non alcoholic");
@@ -45,14 +45,14 @@ describe("AlcoholFilterStrategy", () => {
     it("should always include drinks marked as 'Optional alcohol'", () => {
         const input: CocktailSearchResult = {
             drinks: [
-                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Optional alcohol" },
-                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" }
+                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Optional alcohol", strGlass: "Highball glass", strInstructions: "Mix ingredients and serve." },
+                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic", strGlass: "Collins glass", strInstructions: "Mix ingredients and serve chilled." },
             ]
         };
         const expectedOutput: CocktailSearchResult = {
             drinks: [
-                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Optional alcohol" },
-                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" }
+                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Optional alcohol", strGlass: "Highball glass", strInstructions: "Mix ingredients and serve." },
+                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic", strGlass: "Collins glass", strInstructions: "Mix ingredients and serve chilled." },
             ]
         };
         const result = filterStrategy.filter(input, "Non alcoholic");
@@ -71,8 +71,8 @@ describe("AlcoholFilterStrategy", () => {
     it("should return all drinks if no filter is applied", () => {
         const input: CocktailSearchResult = {
             drinks: [
-                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic" },
-                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic" }
+                { idDrink: "1", strDrink: "Mojito", strCategory: "Cocktail", strDrinkThumb: "", strAlcoholic: "Alcoholic", strGlass: "Highball glass", strInstructions: "Mix ingredients and serve." },
+                { idDrink: "2", strDrink: "Virgin Mojito", strCategory: "Mocktail", strDrinkThumb: "", strAlcoholic: "Non alcoholic", strGlass: "Collins glass", strInstructions: "Mix ingredients and serve chilled." },
             ]
         };
         const expectedOutput = input;
