@@ -14,11 +14,13 @@ async function fetchDrinkById(id: string): Promise<Drink | null> {
   return data.drinks?.[0] || null;
 }
 
-export default async function DrinkPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+interface DrinkPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function DrinkPage({ params }: DrinkPageProps) {
   // No destructuring before render
   const drink = await fetchDrinkById(params.id);
 
