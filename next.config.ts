@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["www.thecocktaildb.com"],
   },
+  outputFileTracingRoot: "/Users/student/MixHaus/mixhaus",
 };
 
 module.exports = {

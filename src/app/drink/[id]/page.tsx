@@ -14,15 +14,23 @@ async function fetchDrinkById(id: string): Promise<Drink | null> {
   return data.drinks?.[0] || null;
 }
 
-interface DrinkPageProps {
-  params: {
-    id: string;
-  };
+export async function generateStaticParams() {
+  const res = await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail");
+  const data = await res.json();
+
+  return data.drinks.map((drink: { idDrink: string }) => ({
+    id: drink.idDrink,
+  }));
 }
 
-export default async function DrinkPage({ params }: DrinkPageProps) {
-  // No destructuring before render
-  const drink = await fetchDrinkById(params.id);
+export default async function DrinkPage({ 
+  params,
+}: { 
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = await Promise.resolve(params);
+  console.log("Params: ", params);
+  const drink = await fetchDrinkById(resolvedParams.id);
 
   if (!drink) return notFound();
 
