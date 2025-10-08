@@ -7,20 +7,53 @@ import MouseTracker from "../../MouseTracker";
 import LogoObserver from "../../LogoObserver";
 
 async function fetchDrinkById(id: string): Promise<Drink | null> {
-  const res = await fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
-  );
-  const data = await res.json();
-  return data.drinks?.[0] || null;
+  try {
+    const res = await fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    );
+
+    if (!res.ok) {
+      console.error(`failed to fetch drink with id ${id}: ${res.statusText}`);
+      return null;
+    }
+
+    const data = await res.json();
+
+    if (!data.drinks || !Array.isArray(data.drinks)) {
+      console.error(`invalid data format for drink with id ${id}:`, data);
+      return null;
+    }  
+  
+    return data.drinks[0] || null;
+  } catch (error) {
+    console.error(`error fetching drink with id ${id}:`, error);
+    return null;
+  }
 }
 
 export async function generateStaticParams() {
-  const res = await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail");
-  const data = await res.json();
+  try {
+    const res = await fetch("https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail");
 
-  return data.drinks.map((drink: { idDrink: string }) => ({
-    id: drink.idDrink,
-  }));
+    if (!res.ok) {
+      console.error(`failed to fetch drink list: ${res.statusText}`);
+      return [];
+    }
+
+    const data = await res.json();
+
+    if (!data.drinks || !Array.isArray(data.drinks)) {
+      console.error("invalid data format for drink list:", data);
+      return [];
+    }
+
+    return data.drinks.map((drink: { idDrink: string }) => ({
+      id: drink.idDrink,
+    }));
+  } catch (error) {
+    console.error("error fetching drink list:", error);
+    return [];
+  }
 }
 
 export default async function DrinkPage({ 
